@@ -2,7 +2,8 @@
 
 int main() {
 
-    Zombie z;
-    z.zombieHorde(10,"toto");
+    Zombie* horde = zombieHorde(5, "Lucie");
+
+    delete[] horde;
     return 0;
 }

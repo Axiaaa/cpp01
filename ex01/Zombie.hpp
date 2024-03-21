@@ -3,6 +3,7 @@
 
 #include <iostream>
 
+
 class Zombie {
 
     private :
@@ -14,8 +15,9 @@ class Zombie {
         ~Zombie();
         void    setName(std::string s);
         void    announce(void);
-        Zombie* zombieHorde(int N, std::string name);
-        
+        void    freeZombieHorde(Zombie* horde);        
 };
+
+Zombie* zombieHorde(int N, std::string name);
 
 #endif

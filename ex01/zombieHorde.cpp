@@ -5,7 +5,7 @@ void Zombie::setName(std::string s) {
     Zombie::name = s;
 }
 
-Zombie* Zombie::zombieHorde(int N, std::string name) {
+Zombie* zombieHorde(int N, std::string name) {
 
     Zombie* horde = new Zombie[N];
 
