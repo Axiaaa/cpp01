@@ -2,6 +2,7 @@
 #define FILE_H
 
 #include <iostream>
+#include <vector>
 
 class File {
 
@@ -9,17 +10,21 @@ class File {
 
     std::string filename;
     int fd;
-    std::string strToReplace; 
-
+    std::string strToReplace;
+    std::string strReplaceWith;
+    std::vector<std::string> *buffer;
     public :
     
-    File(std::string name, int fd);
+    File(std::string name, std::string replaceStr, std::string replaceWith);
+    ~File();
     int getFd();
     void setFd(int fd);
-    void setStrToReplace(std::string str);
-    void setFilename(std::string filename);
     std::string getStrToReplace();
+    std::string getStrReplaceWith();
+    std::string setReplaceWith();
     std::string getFilename();
+    std::vector<std::string> *getBuffer();
+    void setBuffer(std::vector<std::string> *buffer);
 };
 
-# endif FILE_H
+# endif 

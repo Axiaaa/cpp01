@@ -1,5 +1,7 @@
 NAME = sedIsForLosers
-SRC = main.cpp
+SRC = main.cpp \
+	File.cpp \
+
 OBJ = $(SRC:.cpp=.o)
 COMPILO = c++
 FLAGS = -Wall -Wextra -Werror -std=c++98

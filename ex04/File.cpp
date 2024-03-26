@@ -1,15 +1,20 @@
-#include <File.hpp>
+#include "File.hpp"
 
+File::File(std::string filename, std::string replaceStr, std::string replaceWith) {
 
-File::File(std::string filename, int fd) {
-
-    setFilename(filename);
-    setFd(fd);
+    File::filename = filename;
+    File::strToReplace = replaceStr;
+    File::strReplaceWith = replaceWith;
 }
 
-void File::setFilename(std::string filename) {
-    
-    File::filename = filename;
+File::~File() {
+
+    ;
+}
+
+std::string File::getStrReplaceWith() {
+
+    return File::strReplaceWith;
 }
 
 std::string File::getFilename() {
@@ -19,8 +24,13 @@ std::string File::getFilename() {
 
 std::string File::getStrToReplace() {
 
-    return File::filename;
+    return File::strToReplace;
 } 
+
+std::vector<std::string> *File::getBuffer() {
+
+    return File::buffer;
+}   
 
 int File::getFd() {
 
@@ -32,8 +42,7 @@ void File::setFd(int fd) {
     File::fd = fd;
 }
 
-void File::setStrToReplace(std::string str){
+void File::setBuffer(std::vector<std::string> *buffer) {
 
-    File::strToReplace = str;
+    File::buffer = buffer;
 }
-

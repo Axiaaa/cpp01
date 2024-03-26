@@ -1,5 +1,7 @@
 Zombie
 *.o
+*.replace
 .vscode
 reference_and_pointers
 Unnecessaryviolence
+sedIsForLosers
