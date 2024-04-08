@@ -5,38 +5,40 @@
 #include <cctype>
 #include "File.hpp"
 
-std::vector<std::string> isFileExisting(std::string str) {
+
+string isFileExisting(string str) {
     std::ifstream f(str.c_str());
 
-    std::vector <std::string> content;
+    string content;
     if (f.is_open()) {
-        std::string line;
+        string line;
         while (std::getline(f, line))
-            content.push_back(line);
+            content.append(line + "\n");
         f.close();
-    } else {
+        if (content.length() > 0 && content[content.length() - 1] == '\n' && content[content.length() - 2] != '\n')
+            content.erase(content.length() - 1);
+    } else 
         std::cerr << ("Error while opening file. Check if the file exists or if permissions are corrects.");
-    }
     return content;
 }
 
 
-void Checks(std::string filename, std::string strToReplace, std::string strReplaceWith) {
+void Checks(string filename, string strToReplace, string strReplaceWith) {  
     if (filename.empty() || strToReplace.empty() || strReplaceWith.empty())
         std::cerr << "Error, invalid arguments" << std::endl;
-    for (std::string::iterator it = strToReplace.begin(); it != strToReplace.end(); it++) {
-        for (std::string::iterator c = strToReplace.begin(); c != strToReplace.end(); c++) {
+    for (string::iterator it = strToReplace.begin(); it != strToReplace.end(); it++) {
+        for (string::iterator c = strToReplace.begin(); c != strToReplace.end(); c++) {
             if (!isascii(*c))
                 std::cerr << ("Error, invalid string to replace");
     }
-    for (std::string::iterator it = strReplaceWith.begin(); it != strReplaceWith.end(); it++) {
-        for (std::string::iterator c = strReplaceWith.begin(); c != strReplaceWith.end(); c++) {
+    for (string::iterator it = strReplaceWith.begin(); it != strReplaceWith.end(); it++) {
+        for (string::iterator c = strReplaceWith.begin(); c != strReplaceWith.end(); c++) {
             if (!isascii(*c))
                std::cerr << ("Error, invalid string to replace with");
         }
     }
-    for (std::string::iterator it = filename.begin(); it != filename.end(); it++) {
-        for (std::string::iterator c = filename.begin(); c != filename.end(); c++) {
+    for (string::iterator it = filename.begin(); it != filename.end(); it++) {
+        for (string::iterator c = filename.begin(); c != filename.end(); c++) {
             if (!isascii(*c))
                 std::cerr << ("Error, invalid filename");
             }
@@ -45,42 +47,33 @@ void Checks(std::string filename, std::string strToReplace, std::string strRepla
 }
 
 void createFile(File file) {
-    std::string newFilename = file.getFilename() + ".replace";
+    string newFilename = file.getFilename() + ".replace";
     std::ofstream newFile(newFilename.c_str());
     if (newFile.is_open()) {
-        for (std::vector<std::string>::iterator it = file.getBuffer()->begin(); it != file.getBuffer()->end(); it++) {
-            newFile << *it;
-            if (it + 1 != file.getBuffer()->end())
-                newFile << std::endl;
-            else if (it + 1 == file.getBuffer()->end())
-                newFile << std::endl;
-        }
+        newFile << *file.getBuffer();
         newFile.close();
     } else
         std::cerr << "Error while creating file" << std::endl;
 }
 
 void replace(File file) {
-    std::string strToReplace = file.getStrToReplace();
-    std::string strReplaceWith = file.getStrReplaceWith();
-    std::vector<std::string>* buffer = file.getBuffer();
+    string strToReplace = file.getStrToReplace();
+    string strReplaceWith = file.getStrReplaceWith();
+    string line = *file.getBuffer();
 
-    for (std::vector<std::string>::iterator it = buffer->begin(); it != buffer->end(); it++) {
-        std::string& line = *it;
-        size_t pos = 0;
-        while ((pos = line.find(strToReplace, pos)) != std::string::npos) {
-            line = line.substr(0, pos) + strReplaceWith + line.substr(pos + strToReplace.length());
-            pos += strReplaceWith.length();
-        }
+    size_t pos = 0;    
+    while ((pos = line.find(strToReplace, pos)) != string::npos) {
+        line = line.substr(0, pos) + strReplaceWith + line.substr(pos + strToReplace.length());
+        pos += strReplaceWith.length();
     }
+    *file.getBuffer() = line;
 }
 
 int main(int ac, char **av) {
-    //TODO : Fix /n at EOF
     if (ac == 4) {
         Checks(av[1], av[2], av[3]);
         File file(av[1], av[2], av[3]);
-        std::vector<std::string> temp = isFileExisting(file.getFilename());
+        string temp = isFileExisting(file.getFilename());
         file.setBuffer(&temp);
         replace(file);
         createFile(file);

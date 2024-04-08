@@ -4,27 +4,25 @@
 #include <iostream>
 #include <vector>
 
+# define string std::string
 class File {
 
     private :
 
-    std::string filename;
-    int fd;
-    std::string strToReplace;
-    std::string strReplaceWith;
-    std::vector<std::string> *buffer;
+        string filename;
+        string strToReplace;
+        string strReplaceWith;
+        string *buffer;
+
     public :
     
-    File(std::string name, std::string replaceStr, std::string replaceWith);
-    ~File();
-    int getFd();
-    void setFd(int fd);
-    std::string getStrToReplace();
-    std::string getStrReplaceWith();
-    std::string setReplaceWith();
-    std::string getFilename();
-    std::vector<std::string> *getBuffer();
-    void setBuffer(std::vector<std::string> *buffer);
+        File(string name,string replaceStr,string replaceWith);
+        ~File();
+        string getStrToReplace();
+        string getStrReplaceWith();
+        string getFilename();    
+        string *getBuffer();
+        void setBuffer(string *buffer);
 };
 
 # endif 
