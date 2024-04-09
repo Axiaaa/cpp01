@@ -12,29 +12,33 @@ logLevel strToEnum(string s) {
 int main(int ac, char **av) {
     
     string s;
-    logLevel level;
+    Harl harl;
 
     if (ac == 2)
     {
+        logLevel level = strToEnum(av[1]);
         switch (level)
         {
-        case WARNING : 
-            
-            break;
-
         case DEBUG : 
-
+            harl.complain("debug");
+            harl.complain("info");
+            harl.complain("warning");
+            harl.complain("error");
             break;
-
-        case ERROR : 
-
-            break;
-
         case INFO : 
-
+            harl.complain("info");
+            harl.complain("warning");
+            harl.complain("error");
             break;
-
+        case WARNING : 
+            harl.complain("warning");
+            harl.complain("error");
+            break;
+        case ERROR :
+            harl.complain("error");
+            break;
         default:
+            printf << "[ Probably complaining about insignificant problems ]" << NL;
             break;
         }
     }
