@@ -7,9 +7,6 @@ File::File(string filename, string replaceStr, string replaceWith) {
     File::strReplaceWith = replaceWith;
 }
 
-File::~File() {    ;
-}
-
 string File::getStrReplaceWith() {
 
     return File::strReplaceWith;

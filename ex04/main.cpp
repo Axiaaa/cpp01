@@ -22,28 +22,25 @@ string isFileExisting(string str) {
     return content;
 }
 
-
-void Checks(string filename, string strToReplace, string strReplaceWith) {  
+bool Checks(string filename, string strToReplace, string strReplaceWith) {  
     if (filename.empty() || strToReplace.empty() || strReplaceWith.empty())
-        std::cerr << "Error, invalid arguments" << std::endl;
-    for (string::iterator it = strToReplace.begin(); it != strToReplace.end(); it++) {
-        for (string::iterator c = strToReplace.begin(); c != strToReplace.end(); c++) {
-            if (!isascii(*c))
-                std::cerr << ("Error, invalid string to replace");
-    }
-    for (string::iterator it = strReplaceWith.begin(); it != strReplaceWith.end(); it++) {
-        for (string::iterator c = strReplaceWith.begin(); c != strReplaceWith.end(); c++) {
-            if (!isascii(*c))
-               std::cerr << ("Error, invalid string to replace with");
-        }
-    }
-    for (string::iterator it = filename.begin(); it != filename.end(); it++) {
-        for (string::iterator c = filename.begin(); c != filename.end(); c++) {
-            if (!isascii(*c))
-                std::cerr << ("Error, invalid filename");
-            }
+        std::cerr << "Error, invalid arguments\n" << std::endl;
+    for (string::iterator c = strToReplace.begin(); c != strToReplace.end(); c++)
+        if (!isascii(*c)) {
+            std::cerr << ("Error, invalid string to replace\n");
+            return false;
         }   
-    }
+    for (string::iterator c = strReplaceWith.begin(); c != strReplaceWith.end(); c++)
+        if (!isascii(*c)) {
+            std::cerr << ("Error, invalid string to replace with\n");
+            return false;
+        }   
+    for (string::iterator c = filename.begin(); c != filename.end(); c++)
+        if (!isascii(*c)) {
+            std::cerr << ("Error, invalid filename\n");
+            return false;
+        }
+    return true;
 }
 
 void createFile(File file) {
@@ -71,7 +68,8 @@ void replace(File file) {
 
 int main(int ac, char **av) {
     if (ac == 4) {
-        Checks(av[1], av[2], av[3]);
+        if (Checks(av[1], av[2], av[3]) == false)
+            return 1;
         File file(av[1], av[2], av[3]);
         string temp = isFileExisting(file.getFilename());
         file.setBuffer(&temp);

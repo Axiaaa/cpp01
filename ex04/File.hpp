@@ -17,7 +17,6 @@ class File {
     public :
     
         File(string name,string replaceStr,string replaceWith);
-        ~File();
         string getStrToReplace();
         string getStrReplaceWith();
         string getFilename();    
