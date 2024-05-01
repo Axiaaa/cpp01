@@ -2,9 +2,9 @@
 #define FILE_H
 
 #include <iostream>
-#include <vector>
 
 # define string std::string
+
 class File {
 
     private :
@@ -24,4 +24,4 @@ class File {
         void setBuffer(string *buffer);
 };
 
-# endif 
+# endif

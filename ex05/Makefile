@@ -1,15 +1,15 @@
 NAME = Harl
 SRC = Harl.cpp main.cpp
 OBJ = $(SRC:.cpp=.o)
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror -std=c++98
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	clang++ $(FLAGS) $(OBJ) -o $(NAME)
+	c++ $(FLAGS) $(OBJ) -o $(NAME)
 
 %.o: %.cpp
-	clang++ $(FLAGS) -c $< -o $@
+	c++ $(FLAGS) -c $< -o $@
 
 clean:
 	rm -f $(OBJ)

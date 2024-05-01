@@ -1,7 +1,7 @@
 NAME = reference_and_pointers
-SRC = main.cpp
+SRC = main.cpp 
 CC = c++
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -std=c++98
 OBJ = $(SRC:.cpp=.o)
 
 all: $(NAME)
@@ -17,5 +17,5 @@ clean:
 
 re: clean all
 
-.PHONY: all clean re
+.PHONY: all clean re fclean
 

@@ -1,6 +1,5 @@
 #include "Harl.hpp"
 
-
 void Harl::info(void) {
     printf << "Time's clear on the West Coast" << "\n";
 }
