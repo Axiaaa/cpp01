@@ -7,7 +7,7 @@ logLevel strToEnum(string s) {
     if (s == "ERROR") return ERROR;
     if (s == "INFO") return INFO;
     return INVALID;
- }
+}
 
 int main(int ac, char **av) {
     

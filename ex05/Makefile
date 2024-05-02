@@ -12,9 +12,11 @@ $(NAME): $(OBJ)
 	c++ $(FLAGS) -c $< -o $@
 
 clean:
-	rm -f $(OBJ)
+	rm -fr $(OBJ)
 
 fclean: clean
-	rm -f $(NAME)
+	rm -fr $(NAME)
 
 re: fclean all
+
+.PHONY: all clean fclean re

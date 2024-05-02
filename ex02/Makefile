@@ -13,9 +13,12 @@ $(NAME): $(OBJ)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	rm -f $(NAME)
+	rm -rf $(OBJ)
 
-re: clean all
+fclean: clean
+	rm -rf $(NAME)
+
+re: fclean all
 
 .PHONY: all clean re fclean
 
