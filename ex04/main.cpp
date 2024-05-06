@@ -24,7 +24,7 @@ string isFileExisting(string str) {
 
 bool Checks(string filename, string strToReplace, string strReplaceWith) {  
     if (filename.empty() || strToReplace.empty() || strReplaceWith.empty())
-        return (std::cerr << "Error, invalid arguments\n" << std::endl, false);
+        return (std::cerr << "Error, one of the arg is empty\n" << std::endl, false);
     for (string::iterator c = strToReplace.begin(); c != strToReplace.end(); c++)
         if (!isascii(*c)) {
             std::cerr << ("Error, invalid string to replace\n");
